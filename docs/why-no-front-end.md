@@ -13,12 +13,13 @@ That layer used to be the whole product, because talking to a database was hard.
 
 ## What you give up
 
-- **A visual board.** Stages are a table you ask about, not cards you drag.
-- **A phone app.** It runs where Claude Code runs.
-- **A vendor help desk.** This is open source. Enterprise DNA supports the installed version for businesses that want someone to call.
+- **An appointment grid on a screen.** The book is a list you ask about ("what is on tomorrow for Mia?"), not a calendar you drag appointments around in.
+- **Noah and audiometer integration.** Audiograms stay in Noah; you record the four thresholds per ear that the rules and reports need.
+- **Online booking and text reminders.** Reminders are drafted for a person to send. A booking page and automatic texts are something Enterprise DNA builds into an installed version.
+- **A vendor help desk.** This is open source. Enterprise DNA supports the installed version for clinics that want someone to call.
 
 ## Who this fits
 
-Small teams who already use Claude Code, or who would rather learn to ask than learn another interface. If your team needs a screen to look at all day, keep Auditdata Manage. If you need the answers more than the screens, this is cheaper, faster and yours.
+Small teams who already use Claude Code, or who would rather learn to ask than learn another interface. If your front desk needs a booking screen open all day, keep one for that, or have Enterprise DNA build it on top of this database. If you need the answers more than the screens, this is cheaper, faster and yours.
 
 Installed and run for you: https://enterprisedna.co/omni/instead-of/auditdata-manage

@@ -1,0 +1,5 @@
+Client number,First name,Last name,Date of birth,Mobile,Email,Clinic,Audiologist,Funding,Referral source,GP,Status
+50001,Noel,Barker,04/02/1945,0412 000 101,noel.b@example.com,Tasman Hearing Gold Coast,Mia Rossi,HSP voucher,GP,Dr Lim,Active
+50002,Wendy,Sutton,19/08/1957,0412 000 102,,Tasman Hearing Gold Coast,James Tan,Private,Website,,Active
+50003,Tama,Rewiti,30/11/1950,021 000 103,tama.r@example.co.nz,Tasman Hearing Auckland,Aroha Walker,MSD subsidy,Work and Income,Dr Ngata,Active
+50004,Iris,Hale,12/12/1932,0755 000 104,,Tasman Hearing Gold Coast,Mia Rossi,Private,Returning client,,Deceased

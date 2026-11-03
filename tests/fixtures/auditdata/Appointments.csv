@@ -1,0 +1,6 @@
+Appointment ID,Client number,Client,Date,Start time,Duration,Type,Audiologist,Status
+9001,50001,Noel Barker,15/03/2026,09:00,60,Initial hearing assessment,Mia Rossi,Completed
+9002,50001,Noel Barker,29/03/2026,10:00,60,Hearing aid fitting,Mia Rossi,Completed
+9003,50002,Wendy Sutton,02/06/2026,14:00,45,Annual review,James Tan,No show
+9004,50003,Tama Rewiti,10/09/2026,11:00,60,Fitting,Aroha Walker,Completed
+9005,50003,Tama Rewiti,24/09/2026,11:00,30,Aftercare adjustment,Aroha Walker,Completed

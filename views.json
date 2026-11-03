@@ -1,14 +1,34 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Hearing Clinic for Claude Code: what needs attention, rendered by npm run view",
+    "title": "This week at the clinic",
+    "subtitle": "What needs attention, the appointment book and the trials. Rendered by npm run view.",
     "sections": [
-      {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
-      }
+      { "title": "Needs attention", "note": "Appointments with a problem, trials ending, clients tested and not fitted, reviews due, repairs, claims and accounts.", "sql": "select kind,record,due,detail from v_attention order by due nulls last,kind,record" },
+      { "title": "Appointment book", "sql": "select code,on_date as day,starts,minutes,kind,client,name,clinician,clinic,problems from v_schedule where status='booked' and on_date between current_date and current_date+6 order by on_date,starts" },
+      { "title": "Hearing aids on trial", "sql": "select code,client,name,model,ear,fitted_on,trial_ends,trial_days_left,follow_up,clinician from v_trials order by trial_ends" }
+    ]
+  },
+  {
+    "name": "growth",
+    "title": "Fittings and recalls",
+    "subtitle": "Where the next fittings come from: tested and not fitted, reviews due, clients due new aids.",
+    "sections": [
+      { "title": "Tested, not fitted", "sql": "select client,name,tested_on,days_since,better_4fa,clinician,funder,next_booked from v_unfitted order by days_since desc" },
+      { "title": "Due new hearing aids", "sql": "select code,name,funder,models,oldest_kept,eligible_from,next_booked from v_upgrades order by eligible_from" },
+      { "title": "Reviews due, nothing booked", "sql": "select code,name,clinic,funder,last_test,due_on,devices from v_recalls order by due_on nulls first" },
+      { "title": "Clinicians, last 180 days", "sql": "select code,name,tests,fit_recommended,aids_fitted,kept,returned,kept_value,tested_not_fitted from v_clinician_results order by kept_value desc" },
+      { "title": "Referral sources", "sql": "select source,clients,tested,fitted,device_revenue from v_referrals order by device_revenue desc" }
+    ]
+  },
+  {
+    "name": "compliance",
+    "title": "Compliance",
+    "subtitle": "Every rule in docs/compliance.md checked against the records.",
+    "sections": [
+      { "title": "Findings", "sql": "select rule,record,issue from v_compliance order by rule,record" },
+      { "title": "Claims", "sql": "select code,client,funder,item,service_on,amount,state,days_waiting from v_claims where state<>'paid' order by service_on" },
+      { "title": "Clinician registrations", "sql": "select code,name,role,registration_no,registration_expiry,hsp_qualified from clinicians where active order by registration_expiry" }
     ]
   }
 ]

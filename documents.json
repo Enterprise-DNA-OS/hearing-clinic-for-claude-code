@@ -1,11 +1,37 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
+    "name": "device-quote",
+    "title": "Hearing device quote",
+    "for_each": "select distinct c.id,c.code from clients c join devices d on d.client_id=c.id where d.outcome in ('trial','kept') and d.fitted_on>current_date-90 order by c.code",
+    "file": "code",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      { "title": "Client", "layout": "record", "sql": "select c.code,c.name,c.dob,c.address,c.funder,v.voucher_expires from clients c join v_clients v on v.client_id=c.id where c.id=$1" },
+      { "title": "Devices", "note": "Includes the warranty period. The client signs and dates this quote on the day they receive it.", "sql": "select model,ear,serial,funder,price,warranty_until,trial_ends from v_devices where client_id=$1 and outcome in ('trial','kept') and fitted_on>current_date-90 order by ear" },
+      { "title": "Returns policy", "sql": "select 'Return within the trial for a refund of the device price, less any fee set out in the clinic''s returns policy. Trial length ' || value || ' days.' as policy from settings where key='trial_days' and $1::uuid is not null" },
+      { "title": "Signed", "sql": "select name, '______________________' as client_signature, '__________' as date from clients where id=$1" }
+    ]
+  },
+  {
+    "name": "device-record",
+    "title": "Hearing aid record",
+    "for_each": "select distinct c.id,c.code from clients c join devices d on d.client_id=c.id where d.outcome in ('trial','kept') order by c.code",
+    "file": "code",
+    "sections": [
+      { "title": "Client", "layout": "record", "sql": "select code,name,clinic,clinician,funder,last_test,next_booked from v_clients where client_id=$1" },
+      { "title": "Hearing aids", "sql": "select model,ear,serial,fitted_on,outcome,warranty_until,at_repair from v_devices where client_id=$1 and outcome in ('trial','kept') order by fitted_on desc,ear" },
+      { "title": "Repairs", "sql": "select r.code,d.model,d.serial,r.sent_on,r.fault,r.under_warranty,r.returned_on,r.cost from repairs r join v_devices d on d.device_id=r.device_id where d.client_id=$1 order by r.sent_on desc" },
+      { "title": "Hearing tests", "sql": "select tested_on,left_4fa,right_4fa,worse_by,recommendation from v_tests where client_id=$1 order by tested_on desc" }
+    ]
+  },
+  {
+    "name": "statement",
+    "title": "Statement of account",
+    "for_each": "select client_id as id,client as code from v_balances where owing>0 order by client",
+    "file": "code",
+    "sections": [
+      { "title": "Account", "layout": "record", "sql": "select client,name,charged,paid,owing,oldest_due from v_balances where client_id=$1" },
+      { "title": "Invoices", "sql": "select code,issued_on,due_on,description,amount from invoices where client_id=$1 order by issued_on" },
+      { "title": "Payments received", "sql": "select p.paid_on,p.ref,p.amount from payments p join invoices i on i.id=p.invoice_id where i.client_id=$1 order by p.paid_on" }
     ]
   }
 ]

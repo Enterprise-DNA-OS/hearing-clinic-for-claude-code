@@ -1,0 +1,5 @@
+Client number,Client,Sale date,Manufacturer,Product,Side,Serial number,Price,Status
+50001,Noel Barker,29/03/2026,Kiri,Kiri Basic 2,Left,KB2-90001,0,Sold
+50001,Noel Barker,29/03/2026,Kiri,Kiri Basic 2,Right,KB2-90002,0,Sold
+50003,Tama Rewiti,10/09/2026,Sonora,Sonora Vivid 5,Left,SV5-90003,2650,Sold
+50003,Tama Rewiti,10/09/2026,,Batteries 312 x 60,,,45,Sold
